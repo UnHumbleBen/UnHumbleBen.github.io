@@ -5,3 +5,8 @@ function sayThatWasEasy() {
 }
 
 $("#easy").on("click", sayThatWasEasy);
+$(document).keypress(delegateKeyPress);
+
+function delegateKeyPress() {
+    console.log(event.charCode);
+}
