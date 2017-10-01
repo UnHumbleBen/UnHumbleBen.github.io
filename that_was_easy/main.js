@@ -8,5 +8,7 @@ $("#easy").on("click", sayThatWasEasy);
 $(document).keypress(delegateKeyPress);
 
 function delegateKeyPress() {
-    console.log(event.charCode);
+    if (event.charCode == 32) {
+        $("easy").trigger("click")
+    }
 }
