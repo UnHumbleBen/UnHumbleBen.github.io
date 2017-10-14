@@ -21,6 +21,7 @@
 /* global sqrt */
 /* global keyIsPressed */
 /* global keyCode */
+/* global PI */
 
 var object;
 var objectHeight = 40;
@@ -57,7 +58,8 @@ function draw() {
     }
     
     noFill();
-    mirror = ellipse(width/2 - mirrorDiameter/2, height/2 , mirrorDiameter, mirrorDiameter);
+    //mirror = ellipse(width/2 - mirrorDiameter/2, height/2 , mirrorDiameter, mirrorDiameter);
+    mirror = arc(width/2 - mirrorDiameter/2, height/2, mirrorDiameter, mirrorDiameter, -PI/2, PI/2);
     focalLength = mirrorDiameter/4;
     focus = ellipse (width/2 - focalLength, height/2, 10, 10);
     center = ellipse (width/2 - 2 * focalLength, height/2, 10, 10);
