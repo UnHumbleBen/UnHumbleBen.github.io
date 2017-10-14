@@ -29,6 +29,7 @@ var mirror;
 var mirrorDiameter;
 var image;
 var focus;
+var center;
 var focalLength;
 var imageDistance; 
 var imageHeight;
@@ -53,9 +54,13 @@ function draw() {
     
     noFill();
     mirror = ellipse(width/2 - mirrorDiameter/2, height/2 , mirrorDiameter, mirrorDiameter);
-    focus = ellipse (width/2 - focalLength, height/2, 10, 10);
-    
     focalLength = mirrorDiameter/4;
+    focus = ellipse (width/2 - focalLength, height/2, 10, 10);
+    center = ellipse (width/2 - 2 * focalLength, height/2, 10, 10);
+    text("c" , width/2 - 2 * focalLength + 10, height/2);
+    
+    text("f", width/2 - focalLength + 10, height/2);
+    
     fill (0,0,0);
     objectDistance = (width/2 - object.position.x);
     
@@ -75,7 +80,6 @@ function draw() {
     
     
     image = rect(width/2 - imageDistance, height/2 - imageHeight, 5, imageHeight);
-    
     // changing object distance
     if (keyDown(RIGHT_ARROW)) { 
         object.position.x = object.position.x + speed;
