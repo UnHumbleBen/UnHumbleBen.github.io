@@ -18,6 +18,7 @@
 /* global DOWN_ARROW */
 /* global text */
 /* global line */
+/* global sqrt */
 var object;
 var objectHeight = 40;
 var objectDistance;
@@ -39,7 +40,7 @@ function setup() {
     mirrorDiameter = 400;
 }
 function draw() {
-   background(150, 200, 250);
+   background(255, 255, 255);
     var x = 0; 
     while (x <= width) {
         rect(x, height/2, 15, 1);
@@ -125,7 +126,21 @@ function draw() {
     
     text ("left and right arrow keys to move object \n z key to increase mirror size \n x key to decrease mirror size", 700, 340);
     
-    // drawing light rays
+    // drawing first light rays
+    stroke(255,255,0);
     line(object.position.x, object.position.y - object.height/2, width/2, height/2);
     line(width/2 - imageDistance, height/2 - imageHeight, width/2, height/2);
+    
+    stroke(255,0,0);
+    // drawing second light ray from object
+    var aX =  sqrt(mirrorDiameter * mirrorDiameter/4 - (object.height) * (object.height)) + 1/2 * (width - mirrorDiameter);
+    line(object.position.x, object.position.y - object.height/2, aX, object.position.y - object.height/2);
+    line(width/2 - imageDistance, height/2 - imageHeight,  aX, object.position.y - object.height/2);
+    
+    stroke(0,255,0);
+    // drawing third light ray from object
+    var bX = sqrt(mirrorDiameter * mirrorDiameter/4 - (imageHeight) * (imageHeight)) + 1/2 * (width - mirrorDiameter);
+    line(object.position.x, object.position.y - object.height/2, bX,  height/2 - imageHeight);
+    line(width/2 - imageDistance, height/2 - imageHeight,  bX,  height/2 - imageHeight);   
+    
 }
