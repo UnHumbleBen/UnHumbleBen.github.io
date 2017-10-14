@@ -19,6 +19,9 @@
 /* global text */
 /* global line */
 /* global sqrt */
+/* global keyIsPressed */
+/* global keyCode */
+
 var object;
 var objectHeight = 40;
 var objectDistance;
@@ -30,6 +33,7 @@ var focalLength;
 var imageDistance; 
 var imageHeight;
 var speed = 2;
+var showLight = false;
 function setup() {
     createCanvas(1000, 600);
     fill(255,0,255);
@@ -124,23 +128,42 @@ function draw() {
     var magnificationDataX = 700;
     text("MAGNIFICATION: " + magnification, magnificationDataX, 300);
     
-    text ("left and right arrow keys to move object \n z key to increase mirror size \n x key to decrease mirror size", 700, 340);
+    text ("left and right arrow keys to move object \n UP key to make object taller and DOWN key to make object shorter \n z key to increase mirror size \n x key to decrease mirror size", 700, 340);
     
-    // drawing first light rays
-    stroke(255,255,0);
-    line(object.position.x, object.position.y - object.height/2, width/2, height/2);
-    line(width/2 - imageDistance, height/2 - imageHeight, width/2, height/2);
     
-    stroke(255,0,0);
-    // drawing second light ray from object
-    var aX =  sqrt(mirrorDiameter * mirrorDiameter/4 - (object.height) * (object.height)) + 1/2 * (width - mirrorDiameter);
-    line(object.position.x, object.position.y - object.height/2, aX, object.position.y - object.height/2);
-    line(width/2 - imageDistance, height/2 - imageHeight,  aX, object.position.y - object.height/2);
+    if (showLight) {
+        // drawing first light rays
+        stroke(255,255,0);
+        line(object.position.x, object.position.y - object.height/2, width/2, height/2);
+        line(width/2 - imageDistance, height/2 - imageHeight, width/2, height/2);
+        
+        stroke(255,0,0);
+        // drawing second light ray from object
+        var aX =  sqrt(mirrorDiameter * mirrorDiameter/4 - (object.height) * (object.height)) + 1/2 * (width - mirrorDiameter);
+        line(object.position.x, object.position.y - object.height/2, aX, object.position.y - object.height/2);
+        line(width/2 - imageDistance, height/2 - imageHeight,  aX, object.position.y - object.height/2);
+        
+        stroke(0,255,0);
+        // drawing third light ray from object
+        var bX = sqrt(mirrorDiameter * mirrorDiameter/4 - (imageHeight) * (imageHeight)) + 1/2 * (width - mirrorDiameter);
+        line(object.position.x, object.position.y - object.height/2, bX,  height/2 - imageHeight);
+        line(width/2 - imageDistance, height/2 - imageHeight,  bX,  height/2 - imageHeight);   
+    }
     
-    stroke(0,255,0);
-    // drawing third light ray from object
-    var bX = sqrt(mirrorDiameter * mirrorDiameter/4 - (imageHeight) * (imageHeight)) + 1/2 * (width - mirrorDiameter);
-    line(object.position.x, object.position.y - object.height/2, bX,  height/2 - imageHeight);
-    line(width/2 - imageDistance, height/2 - imageHeight,  bX,  height/2 - imageHeight);   
+    var keyword = " show ";
+    if (showLight) keyword = " hide ";
+    var keykey = " shift and m "
+    if (showLight) keykey = " spacebar "
+    text("press" + keykey +  "to" + keyword +  "light rays", 700, 320);
     
+    
+    /*
+    if (keyIsPressed && keyCode === (32)) {
+        if (showLight == true) showLight = false;
+        else showLight = true;
+    }
+    */
+    
+        if (keyIsPressed && keyCode == (77)) showLight = true;
+        if (keyIsPressed && keyCode == (32)) showLight = false;
 }
