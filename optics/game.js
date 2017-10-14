@@ -17,6 +17,7 @@
 /* global UP_ARROW */
 /* global DOWN_ARROW */
 /* global text */
+/* global line */
 var object;
 var objectHeight = 40;
 var objectDistance;
@@ -97,9 +98,6 @@ function draw() {
     var isConcave = "CONCAVE ";
     if (objectDistance >= 0 && mirrorDiameter <= 0 || objectDistance <= 0 && mirrorDiameter >= 0) {
         isConcave = "CONVEX ";
-        
-        
-        
     }
     
     var mirrorDataX = 700;
@@ -124,8 +122,10 @@ function draw() {
     
     var magnificationDataX = 700;
     text("MAGNIFICATION: " + magnification, magnificationDataX, 300);
-
     
+    text ("left and right arrow keys to move object \n z key to increase mirror size \n x key to decrease mirror size", 700, 340);
     
-    
+    // drawing light rays
+    line(object.position.x, object.position.y - object.height/2, width/2, height/2);
+    line(width/2 - imageDistance, height/2 - imageHeight, width/2, height/2);
 }
