@@ -43,9 +43,13 @@ function setup() {
     //object = rect(width/2 - objectDistance, height/2 - objectHeight , 5, objectHeight);
 
     mirrorDiameter = 400;
+    
 }
 function draw() {
    background(255, 255, 255);
+   text ("Spherical Mirror Simulator", 700, 80);
+   text ("object", object.position.x + 10, height/2 - 10);
+   
     var x = 0; 
     while (x <= width) {
         rect(x, height/2, 15, 1);
@@ -80,6 +84,7 @@ function draw() {
     
     
     image = rect(width/2 - imageDistance, height/2 - imageHeight, 5, imageHeight);
+    text("image", width/2 - imageDistance + 10, height/2 + 10);
     // changing object distance
     if (keyDown(RIGHT_ARROW)) { 
         object.position.x = object.position.x + speed;
