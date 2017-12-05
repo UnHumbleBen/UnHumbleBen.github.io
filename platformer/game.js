@@ -8,6 +8,7 @@
 /*global camera*/
 /*global keyDown*/
 /*global UP_ARROW*/
+/*global random*/
 var gravity = 0.3;
 var JUMP = -5;
 
@@ -17,7 +18,7 @@ var GROUND_SPRITES_HEIGHT = 50;
 var numGroundSprites;
 
 var player;
-
+var obstacleSprites;
 function setup() {
     createCanvas(400,300);
     background(150,200,250);
@@ -30,6 +31,7 @@ function setup() {
     }
     
     player = createSprite(100, height-75, 50, 50);
+    obstacleSprites = new Group();
 }
 function draw() {
     background(150,200,250);
@@ -51,5 +53,20 @@ function draw() {
         firstGroundSprite.position.x += numGroundSprites*firstGroundSprite.width;
         groundSprites.add(firstGroundSprite);
     }
+    if (random() > 0.95) {
+        var obstacle = createSprite(camera.position.x + width, height-50-15, 30, 30);
+        obstacleSprites.add(obstacle);    
+    }
+    
+    var firstObstacle = obstacleSprites[0];
+    if (obstacleSprites.length > 0 && firstObstacle.position.x < camera.position.x - width/2 - firstObstacle.width/2) {
+        obstacleSprites.remove(firstObstacle);
+    }
+    
+    obstacleSprites.overlap(player, endGame);
     drawSprites();
+}
+
+function endGame() {
+    console.log("Game Over!");
 }
