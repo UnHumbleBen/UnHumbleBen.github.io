@@ -59,7 +59,14 @@ function draw() {
     
     noFill();
     //mirror = ellipse(width/2 - mirrorDiameter/2, height/2 , mirrorDiameter, mirrorDiameter);
-    mirror = arc(width/2 - mirrorDiameter/2, height/2, mirrorDiameter, mirrorDiameter, -PI/2, PI/2);
+    
+    if (mirrorDiameter >= 0) {
+        mirror = arc(width/2 - mirrorDiameter/2, height/2, mirrorDiameter, mirrorDiameter, -PI/2, PI/2);
+    } 
+    else {
+        mirror = arc(width/2 - mirrorDiameter/2, height/2, mirrorDiameter, mirrorDiameter, PI/2, 3 * PI/2);
+    }
+    //mirror = arc(width/2 - mirrorDiameter/2, height/2, mirrorDiameter, mirrorDiameter, -PI/2, PI/2);
     focalLength = mirrorDiameter/4;
     focus = ellipse (width/2 - focalLength, height/2, 10, 10);
     center = ellipse (width/2 - 2 * focalLength, height/2, 10, 10);
